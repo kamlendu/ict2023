@@ -6,10 +6,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,27 +17,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "HelloServlet", initParams = 
-        {
-            @WebInitParam(name="host", value="www.google.co.in"),
-            @WebInitParam(name="port", value="3186")
-        },
-        urlPatterns = {"/HelloServlet"})
-public class HelloServlet extends HttpServlet {
-
+@WebServlet(name = "VisitorServlet", urlPatterns = {"/VisitorServlet"})
+public class VisitorServlet extends HttpServlet {
     
-    
-    
-    @Override
-    public void init()
-            throws ServletException {
-       
-        super.init(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-   
-    System.out.println(" I am in the init method..");
-    
-    
-    }
+    int visits;
+    Cookie visitorCookie=null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,67 +32,53 @@ public class HelloServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    public void destroy() {
-        super.destroy(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-   
-    System.out.println(" I am in the destroy method..");
-    }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HelloServlet</title>");            
+            out.println("<title>Servlet VisitorServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h3> Hello World of Servlets !!! </h3>");
             
-            String firstName = request.getParameter("fname");
-            String lastName = request.getParameter("lname");
-         
-            out.println("<h3> Full Name :"+ firstName + " "+ lastName+ "</h3>");
+            Cookie[] cookies = request.getCookies();
             
-          //  String pname[] = request.getParameterValues("pname");
+            for(Cookie c : cookies)
+            {
+                if(c.getName().equals("visit"))
+                {
+                    visitorCookie =c;
+                }
+                out.println("<br/>"+c.getName()+ " : "+ c.getValue());
+            }
             
-          //  out.println("<h3> Full Name :"+ pname[0] + " "+ pname[1]+ "</h3>");
-       
-          
-          out.println(request.getMethod());
-          out.println(request.getQueryString());
-           out.println("<br/>"+request.getLocalPort());
-           
-           out.println("<br/>"+ this.getInitParameter("host"));
-            out.println("<br/>"+ this.getInitParameter("port"));
-           
-          
-           
-           //response.sendRedirect("http://localhost:8080/SampleWebApp/Another");
-          
-          
-          
             
-//             Enumeration<String> hnames = request.getHeaderNames();
-//        
-//        while(hnames.hasMoreElements())
-//        {
-//            String hname = hnames.nextElement();
-//            
-//            out.println("<h3>" + hname + " :"+ request.getHeader(hname)+"</h3>");
-//        }
-//        
-         
+            
+            if(visitorCookie!=null)
+            {
+               int visit = Integer.parseInt(visitorCookie.getValue());
+               visits=visit+1;
+               visitorCookie.setValue(String.valueOf(visits));
+               response.addCookie(visitorCookie);
+            }
+            else
+            {
+                visits=1;
+                visitorCookie = new Cookie("visit", String.valueOf(visits));
+                response.addCookie(visitorCookie);
+            }
+            
+            out.println("<h2> You have visited this page "+ visits + " times </h2>");
+            
+            //visitorCookie.setMaxAge(0);
+            
+            out.println("<h1>Servlet VisitorServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-        
-       
-        
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -124,7 +93,6 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(" I am in the doGet method..");
         processRequest(request, response);
     }
 
@@ -139,8 +107,6 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println(" I am in the doPost method..");
         processRequest(request, response);
     }
 
