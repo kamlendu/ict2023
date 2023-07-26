@@ -5,3 +5,5 @@ servlets/HelloServlet.class
 servlets/VisitorServlet.class
 servlets/SecondServlet.class
 servlets/Another.class
+servlets/BookServlet.class
+.netbeans_automatic_build
