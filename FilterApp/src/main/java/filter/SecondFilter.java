@@ -20,7 +20,7 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author root
  */
-@WebFilter(filterName = "SecondFilter", urlPatterns = {"/*"})
+//@WebFilter(filterName = "SecondFilter", urlPatterns = {"/*"})
 public class SecondFilter implements Filter {
     
     private static final boolean debug = true;

@@ -1,47 +1,81 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
-package filter;
+
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author root
  */
-//@WebFilter(filterName = "FirstFilter",  urlPatterns = {"/*"})
-public class FirstFilter implements Filter {
+public class AuthenticationFilter implements Filter {
     
     private static final boolean debug = true;
-
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public FirstFilter() {
+    public AuthenticationFilter() {
     }    
     
-//    private void doBeforeProcessing(ServletRequest request, ServletResponse response)
-//            throws IOException, ServletException {
-//        
-//    }    
-//    
-//    private void doAfterProcessing(ServletRequest request, ServletResponse response)
-//            throws IOException, ServletException {
-//       
-//    }
+    private void doBeforeProcessing(ServletRequest request, ServletResponse response)
+            throws IOException, ServletException {
+        Connection con = null;
+		Statement stmt;
+
+		try 
+		{
+			String username = "root";
+			String password = "ompandey";
+			String url = "jdbc:mysql://localhost/test?useSSL=false";
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+			con = DriverManager.getConnection(url,username,password);
+
+			if(con != null)
+			{
+				
+				stmt = con.createStatement();
+				String query = "SELECT * FROM login where user = '" + request.getParameter("txtusername").toString() + "' and password ='" + request.getParameter("txtpassword").toString() + "'";
+
+			/* Execute the query using the ResultSet object */
+				ResultSet rs = stmt.executeQuery(query);
+
+				if(rs.next()) 
+				{
+                                    
+				HttpServletResponse res= (HttpServletResponse)response;	
+				res.sendRedirect("http://localhost:8080/FilterApp/BookMaster");
+                                }
+                                else
+                                {
+                                  request.setAttribute("errormsg", "<P><B>Either Login name or password is wrong. Try Again!!!.</B>");  
+                                }
+                        }
+                }
+                catch(Exception e)
+                {
+                    
+                }
+    }
 
     /**
      *
@@ -55,15 +89,16 @@ public class FirstFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-                
-       // doBeforeProcessing(request, response);
-       
-       System.out.println("The First Filter encounter in Request");
+        
+        if (debug) {
+            log("AuthenticationFilter:doFilter()");
+        }
+        
+        doBeforeProcessing(request, response);
         
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
-            
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
@@ -72,11 +107,9 @@ public class FirstFilter implements Filter {
             t.printStackTrace();
         }
         
-        System.out.println("The First Filter encounter in Response");
+       
         
-        //doAfterProcessing(request, response);
-
-           }
+    }
 
     /**
      * Return the filter configuration object for this filter.
@@ -95,19 +128,19 @@ public class FirstFilter implements Filter {
     }
 
     /**
-     * Destroy method for this filter
+     * Destroy method for this filter 
      */
     public void destroy() {        
     }
 
     /**
-     * Init method for this filter
+     * Init method for this filter 
      */
     public void init(FilterConfig filterConfig) {        
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("FirstFilter:Initializing filter");
+                log("AuthenticationFilter:Initializing filter");
             }
         }
     }
@@ -118,9 +151,9 @@ public class FirstFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("FirstFilter()");
+            return ("AuthenticationFilter()");
         }
-        StringBuffer sb = new StringBuffer("FirstFilter(");
+        StringBuffer sb = new StringBuffer("AuthenticationFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
@@ -173,5 +206,4 @@ public class FirstFilter implements Filter {
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);        
     }
-    
 }
