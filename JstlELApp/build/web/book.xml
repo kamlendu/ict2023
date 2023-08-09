@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<book>
+    <details>
+		<bookname>Linux For Beginners</bookname>
+		<synopsis>Linux</synopsis>
+		<authorname>Shreyas Desai</authorname>
+		<publishername>SPD</publishername>
+	</details>
+	<details>
+		<bookname>PHP 5.1</bookname>
+		<synopsis>PHP, PDO, MySQL, Prado</synopsis>
+		<authorname>Ivan Bayross</authorname>
+		<publishername>Shroff</publishername>
+	</details>
+        <simple x="hello">World</simple>
+</book> 

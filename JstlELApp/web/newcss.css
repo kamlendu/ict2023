@@ -1,0 +1,38 @@
+/* 
+    Document   : newcss
+    Created on : Aug 7, 2010, 11:23:09 PM
+    Author     : Rishi
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.cssborder{
+    border-color: #093558; width: 900px;
+float: left;
+}
+
+A:link {  color: navy; text-decoration:none; }
+A:visited {  color: navy; text-decoration:none; }
+A:active {  color: navy; cursor:hand; text-decoration:none; }
+A:hover {  color: navy; cursor:hand; text-decoration:"underline"; }
+ 
+.code
+{
+    border:1px #093558 solid;
+    background-color:#BDD7EB;
+    color: #093558;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    width: 550px;
+
+}
