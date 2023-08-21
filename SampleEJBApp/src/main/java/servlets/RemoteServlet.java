@@ -8,7 +8,9 @@ import ejb.HelloBeanLocal;
 import ejb.MathEJBRemote;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
+import java.util.Properties;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +21,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "EJBServlet", urlPatterns = {"/EJBServlet"})
-public class EJBServlet extends HttpServlet {
+@WebServlet(name = "RemoteServlet", urlPatterns = {"/RemoteServlet"})
+public class RemoteServlet extends HttpServlet {
     
-    @EJB HelloBeanLocal hbl;
-    @EJB(mappedName = "ejb/math") MathEJBRemote mbr;
+    InitialContext ic;
+    MathEJBRemote mbr;
+    HelloBeanLocal hbl;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,14 +46,34 @@ public class EJBServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EJBServlet</title>");            
+            out.println("<title>Servlet RemoteServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> EJB Call :  " + hbl.sayHello("Payara") + "</h1>");
+            try{
+            Properties p = new Properties();
+             p.setProperty("org.omg.CORBA.ORBInitialHost", "localhost");
+            p.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
+            
+            ic = new InitialContext(p);
+            
+          InitialContext   ic1 = new InitialContext();
+          
+          
+            mbr = (MathEJBRemote) ic.lookup("ejb/math");
+            hbl = (HelloBeanLocal)ic1.lookup("java:global/SampleEJBApp/HelloBean");
+            
+            }
+            catch(NamingException ne)
+            {
+                ne.printStackTrace();
+            }
+            
+            
+            
+            
             out.println("<h1> The sum of  Sum 60 and 40 is :  " + mbr.sum(60,40) + "</h1>");
-     
-            
-            
+            out.println("<h1> EJB Call :  " + hbl.sayHello("Payara") + "</h1>");
+           // out.println("<h1>Servlet RemoteServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

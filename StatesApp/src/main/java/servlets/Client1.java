@@ -4,8 +4,8 @@
  */
 package servlets;
 
-import ejb.HelloBeanLocal;
-import ejb.MathEJBRemote;
+import ejb.StatefulBeanLocal;
+import ejb.StatelessBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -19,11 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "EJBServlet", urlPatterns = {"/EJBServlet"})
-public class EJBServlet extends HttpServlet {
+@WebServlet(name = "Client1", urlPatterns = {"/Client1"})
+public class Client1 extends HttpServlet {
     
-    @EJB HelloBeanLocal hbl;
-    @EJB(mappedName = "ejb/math") MathEJBRemote mbr;
+    @EJB StatelessBeanLocal stateless;
+    @EJB StatefulBeanLocal stateful;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,13 +43,11 @@ public class EJBServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EJBServlet</title>");            
+            out.println("<title>Servlet Client1</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> EJB Call :  " + hbl.sayHello("Payara") + "</h1>");
-            out.println("<h1> The sum of  Sum 60 and 40 is :  " + mbr.sum(60,40) + "</h1>");
-     
-            
+            out.println("<h1>Stateless i = " + stateless.increment() + "</h1>");
+            out.println("<h1>Stateful i = " + stateful.increment() + "</h1>");
             
             out.println("</body>");
             out.println("</html>");
