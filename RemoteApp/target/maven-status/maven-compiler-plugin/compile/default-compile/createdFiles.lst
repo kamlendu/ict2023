@@ -1,0 +1,4 @@
+RemoteServlet.class
+it/remoteapp/resources/JakartaEE8Resource.class
+it/remoteapp/JakartaRestConfiguration.class
+ejb/Calculate.class

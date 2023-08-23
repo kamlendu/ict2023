@@ -1,0 +1,4 @@
+it/ejbapp/JakartaRestConfiguration.class
+it/ejbapp/resources/JakartaEE8Resource.class
+ejb/Calculate.class
+ejb/CalculateBean.class
