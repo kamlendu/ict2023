@@ -1,0 +1,5 @@
+ejb/FirstTopicBean.class
+ejb/SecondQueueBean.class
+ejb/FirstQueueBean.class
+it/messagingmodule/NewSessionBean.class
+ejb/SecondTopicBean.class
