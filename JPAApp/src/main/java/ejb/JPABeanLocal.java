@@ -16,5 +16,11 @@ import javax.ejb.Local;
 public interface JPABeanLocal {
     
     Collection<BookMaster> getAllBooks();
+    void addBook(String bookName, String author, String publisher, String synopsis);
+    void updateBook(int bookid, String bookName, String author, String publisher, String synopsis);
+    void removeBook(int bookid);
+    Collection<BookMaster> findBookByAuthor(String authorName );
+    BookMaster findBookbyID(int bookid);
+    BookMaster findBookByName(String bookName);
     
 }

@@ -46,13 +46,31 @@ public class JPAServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
+          //  jbl.addBook("AI in India", "Raghav Rao", "Inca Pub", "An AI Primer");
+        //  jbl.updateBook(370, "AI in India", "Raghav Rao", "Penguins", "An AI Primer");
+        //   jbl.removeBook(370);
+       
+        Collection<BookMaster> authbooks = jbl.findBookByAuthor("Shri M.");
+        
+         out.println("<table border='1'>");
+        for(BookMaster b : authbooks)
+        {
+            out.println("<tr><td>"+ b.getBookName()+"</td><td>"+b.getAuthorName()+"</td><td>"+ b.getPublisherName()+"</td></tr>");
+        }
+         out.println("</table> <br/><br/>");   
+            
+        
+        
+        
+        
         Collection<BookMaster> books = jbl.getAllBooks();
         
+        out.println("<table border='1'>");
         for(BookMaster b : books)
         {
-            out.println("<h2> Book Name = "+ b.getBookName()+"</h2>");
+            out.println("<tr><td>"+ b.getBookName()+"</td><td>"+b.getAuthorName()+"</td><td>"+ b.getPublisherName()+"</td></tr>");
         }
-            
+         out.println("</table>");   
             
             
             

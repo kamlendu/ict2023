@@ -57,6 +57,13 @@ public class BookMaster implements Serializable {
         this.bookID = bookID;
     }
 
+    public BookMaster(String bookName, String authorName, String publisherName, String synopsis) {
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.publisherName = publisherName;
+        this.synopsis = synopsis;
+    }
+
     public String getBookName() {
         return bookName;
     }
