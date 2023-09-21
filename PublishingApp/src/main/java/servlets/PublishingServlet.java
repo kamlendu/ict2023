@@ -4,10 +4,13 @@
  */
 package servlets;
 
-import ejb.JPABeanLocal;
-import entity.BookMaster;
+import ejb.PublishingBeanLocal;
+import entity.Address;
+import entity.Customer;
+import entity.Subscription;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,12 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "JPAServlet", urlPatterns = {"/JPAServlet"})
-public class JPAServlet extends HttpServlet {
+@WebServlet(name = "PublishingServlet", urlPatterns = {"/PublishingServlet"})
+public class PublishingServlet extends HttpServlet {
     
-    @EJB JPABeanLocal jbl;
-    
-   // @Inject DataOperation jbl;
+    @EJB PublishingBeanLocal pbl;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,42 +45,53 @@ public class JPAServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet JPAServlet</title>");            
+            out.println("<title>Servlet PublishingServlet</title>");            
             out.println("</head>");
-            out.println("<body>");
+            out.println("<body><h3>");
             
-          //  jbl.addBook("AI in India", "Raghav Rao", "Inca Pub", "An AI Primer");
-      //    jbl.updateBook(371, "AI in India", "Raghav Rao", "Penguins", "An AI Primer");
-          // jbl.removeBook(371);
-          //  jbl.removeBook(372);
-       
-        Collection<BookMaster> authbooks = jbl.findBookByAuthor("Shri M.");
+           // pbl.addCustomer("Riken", "Parmar");
+         //  pbl.addAddressToCustomer("Udhna Street", "Surat", "Gujarat", "362312", 10);
+          //pbl.addAddressToCustomer("Vadodara Street", "Vadodara", "Gujarat", "380001", 10);
+          
+         // pbl.removeAddressToCustomer(6, 10);
+         //  pbl.removeAddressToCustomer(7, 10);
+          
+         pbl.removeCustomer(10);
         
-         out.println("<table border='1'>");
-        for(BookMaster b : authbooks)
-        {
-            out.println("<tr><td>"+ b.getBookName()+"</td><td>"+b.getAuthorName()+"</td><td>"+ b.getPublisherName()+"</td></tr>");
-        }
-         out.println("</table> <br/><br/>");   
+          
+          ArrayList<Integer> sids = new ArrayList<Integer>();
+          sids.add(1);
+          sids.add(4);
+          
+         // pbl.addSubscriptionsToCustomer(10, sids);
+          
+         //  pbl.removeSubscriptionsToCustomer(10, sids);
             
-        
-        
-        
-        
-        Collection<BookMaster> books = jbl.getAllBooks();
-        
-        out.println("<table border='1'>");
-        for(BookMaster b : books)
-        {
-            out.println("<tr><td>"+ b.getBookName()+"</td><td>"+b.getAuthorName()+"</td><td>"+ b.getPublisherName()+"</td></tr>");
-        }
-         out.println("</table>");   
+            Collection<Customer> customers = pbl.getAllCustomers();
+            
+            for(Customer c : customers)
+            {
+                out.println("id: "+ c.getCustomerID()+" Customer Name : "+ c.getFirstName() + " "+ c.getLastName());
+                
+                Collection<Address> addresses = pbl.getAddressesofCustomer(c.getCustomerID());
+             
+                for(Address a : addresses)
+               {
+                  out.println("<br/> Aid : "+ a.getAddressId()+" Street :"+ a.getStreet()+ " city: "+ a.getCity()+" State: "+ a.getState());
+               }
+               Collection<Subscription> subs = pbl.getAllSubscriptionsOfCustomer(c.getCustomerID());
+                
+               for(Subscription s : subs){
+                out.println("<br/> sid : "+ s.getSubscriptionId()+" Title: "+ s.getTitle() + " Type : "+ s.getType());
+               }
+               
+              out.println("<hr/>");
+            }
             
             
             
             
-            
-            out.println("<h1>Servlet JPAServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PublishingServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
