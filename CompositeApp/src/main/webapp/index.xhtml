@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <h:selectOneMenu id="sm" value="#{user.person}" onchange="document.forms[0].submit()" valueChangeListener="#{user.valueEvent}">
+            
+                <f:selectItems value="#{user.names}" var="nm" itemLabel="#{nm}" itemValue="#{nm}"/>
+            
+            </h:selectOneMenu>
+            
+            <h:commandButton id="btn" value="Submit" actionListener="#{user.handle}"/>
+            
+            
+        </h:form>
+        <br/><br/>
+                 <h:outputText id="ot1" value="#{user.person}"/> <br/>
+                 <h:outputText id="ot2" value="#{user.message1}"/> <br/>
+                <h:outputText id="ot3" value="#{user.message2}"/> <br/>
+        
+        
+        
+       
+    </h:body>
+</html>

@@ -7,6 +7,10 @@ package beans;
 import java.util.Collection;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -18,7 +22,7 @@ public class Person {
     
     String pname;
     String email;
-    String salary;
+    double salary;
     String gender;
     Collection<String> hobbies;
 
@@ -51,15 +55,35 @@ public class Person {
         this.email = email;
     }
 
-   
-
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
+
+   
+public void validateSalary(FacesContext ctx, UIComponent ui, Object obj)
+{
+
+Double sal = (Double)obj;
+
+if(sal <3000)
+{
+    FacesMessage msg = new FacesMessage("Salary cannot be less than 3000");
+    msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+    throw new ValidatorException(msg);
+    
+}
+
+
+
+
+
+    
+}
+   
 
     public String getGender() {
         return gender;

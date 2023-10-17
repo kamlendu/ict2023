@@ -12,12 +12,25 @@
             <h:panelGrid columns="2" border="1">
                 <h:outputLabel for="p" value="Name of Person"/>
                 <h:inputText id="p" required="true" requiredMessage="Person Name cannot be blank"  value="#{person.pname}">
-                
+                    <f:validateLength  minimum="3" maximum="25"/>
                 </h:inputText>
                 <h:outputLabel for="e" value="Email of Person"/>
-                <h:inputText id="e" required="true" requiredMessage="Email cannot be blank"  value="#{person.email}"/>
+               
+                <h:inputText id="e" required="true" requiredMessage="Email cannot be blank"  value="#{person.email}">
+               
+                    <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
+                
+                </h:inputText>
+               
                 <h:outputLabel for="s" value="Salary"/>
-                <h:inputText id="s" required="true" requiredMessage="Salary cannot be blank"  value="#{person.salary}"/>
+                <h:inputText id="s"  required="true" requiredMessage="Salary cannot be blank"  value="#{person.salary}">
+                    <f:validator validatorId="salvalidator"/>
+<!--                    <f:validateDoubleRange minimum="3000" maximum="50000"/>-->
+
+                </h:inputText>
+                
+                
+                
                 <h:outputLabel for="e" value="Gender"/>
                 <h:selectOneRadio id="g" value="#{person.gender}">
                     <f:selectItem itemLabel="Male" itemValue="Male"/>

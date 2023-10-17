@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:custom="http://example.com/tags"
+      xmlns:login="http://xmlns.jcp.org/jsf/composite/components/login">
+      
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      
+        <br/> ${eng.greet}
+        <br/> ${hindi.greet}
+        
+        
+        <br/>
+        <custom:uppers value="information"/>
+        
+        <br/>
+        <h:form>  
+            <login:mylogin formtitle="${hindi.title}"
+                           nameprompt="${hindi.userlabel}"
+                           passwordprompt="${hindi.passlabel}"
+                       buttontext="Submit It"
+                       managedbean="#{user}"
+                       loginaction="#{user.action()}"/>
+        
+        </h:form>
+    </h:body>
+</html>
