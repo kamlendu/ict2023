@@ -1,0 +1,12 @@
+it/jsfsecurityapp/JakartaRestConfiguration.class
+beans/LoginBean.class
+filter/NoCacheFilter.class
+config/Project.class
+beans/HelloBean.class
+client/SecureClient$1.class
+filter/RestFilter.class
+rest/SecureResource.class
+ejb/SecureBean.class
+it/jsfsecurityapp/resources/JakartaEE8Resource.class
+rest/ApplicationConfig.class
+client/SecureClient.class
