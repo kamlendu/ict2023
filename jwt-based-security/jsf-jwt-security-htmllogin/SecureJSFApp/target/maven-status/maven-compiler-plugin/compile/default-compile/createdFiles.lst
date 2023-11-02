@@ -1,0 +1,16 @@
+beans/LoginBean.class
+filter/NoCacheFilter.class
+config/Project.class
+jwtrest/TokenProvider.class
+it/securejsfapp/resources/JakartaEE8Resource.class
+beans/HelloBean.class
+client/SecureClient$1.class
+it/securejsfapp/JakartaRestConfiguration.class
+jwtrest/JWTCredential.class
+jwtrest/Constants.class
+ejb/SecureBean.class
+client/MyRestFilter.class
+auth/SecureAuthentication.class
+it/securejsfapp/resources/SecureResource.class
+record/KeepRecord.class
+client/SecureClient.class

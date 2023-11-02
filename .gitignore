@@ -20,3 +20,12 @@
 /CompositeApp/target/
 /SecurityApp/target/
 /JSFSecurityApp/target/
+/httpauth-based-security/SecurityApp/target/
+/httpauth-based-security/jsf-httpauth-rest-jsflogin/SecureJSFApp/build/
+/httpauth-based-security/jsf-httpauth-rest-jsflogin/SecureJSFApp/dist/
+/httpauth-based-security/jsf-httpauth-rest-jsflogin/SecureJSFApp/nbproject/private/
+/httpauth-based-security/securejsfwithhttp-auth_htmllogin/SecureJSFApp/build/
+/httpauth-based-security/securejsfwithhttp-auth_htmllogin/SecureJSFApp/dist/
+/httpauth-based-security/securejsfwithhttp-auth_htmllogin/SecureJSFApp/nbproject/private/
+/jwt-based-security/SecureJSFApp/target/
+/jwt-based-security/SecurityApp/target/

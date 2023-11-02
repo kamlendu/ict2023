@@ -1,0 +1,15 @@
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/jwtrest/Constants.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/client/SecureClient.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/record/KeepRecord.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/auth/SecureAuthentication.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/jwtrest/TokenProvider.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/it/securejsfapp/resources/SecureResource.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/jwtrest/JWTCredential.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/client/MyRestFilter.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/beans/HelloBean.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/filter/NoCacheFilter.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/it/securejsfapp/resources/JakartaEE8Resource.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/ejb/SecureBean.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/it/securejsfapp/JakartaRestConfiguration.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/config/Project.java
+/root/NetBeansProjects/it2023/jwt-security/SecureJSFApp/src/main/java/beans/LoginBean.java
