@@ -1,0 +1,4 @@
+it/openidapp/resources/JakartaEE8Resource.class
+oauth/OAuthServlet.class
+it/openidapp/JakartaRestConfiguration.class
+oauth/ProtectedServlet.class
